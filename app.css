@@ -2,15 +2,34 @@ html {
   font-family: sans-serif;
 }
 
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
 #map {
   width: 90%;
   height: 20rem;
   border: 1px solid #ccc;
-  margin: 2rem auto;
+  margin: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+}
+
+#location-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  border: 1px #ccc solid;
+  margin: 2rem 2rem 0;
+  width: 420px;
 }
 
 form {
@@ -18,13 +37,14 @@ form {
   margin: 2rem auto;
   padding: .2rem 0;
 }
-
 #address {
   height: calc(1.5em + .75rem + 2px);
+  width: 260px;
   border: 1px solid #ced4da;
   border-radius: .25rem;
 }
-
 #search-button {
   margin-bottom: .2rem;
 }
+
+

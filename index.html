@@ -14,8 +14,19 @@
     <link rel="stylesheet" href="app.css">
   </head>
   <body>
+    <header>
+      <h1>Elevation Map</h1>
+    </header>
     <div id="map">
       <p>Please enter an address!</p>
+    </div>
+    <div class="d-none" id="location-info">
+      <h2>Location Information</h2>
+      <ul>
+        <li id="elevation"></li>
+        <li id="weather-description"></li>
+        <li id="temperature"></li>
+      </ul>
     </div>
     <form>
       <input type="text" id="address">
