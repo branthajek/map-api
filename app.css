@@ -14,10 +14,8 @@ h1, h2 {
 }
 
 #map {
-  width: 90%;
   height: 20rem;
   border: 1px solid #ccc;
-  margin: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +26,10 @@ h1, h2 {
   flex-direction: column;
   padding-top: 1rem;
   border: 1px #ccc solid;
-  margin: 2rem 2rem 0;
-  width: 420px;
+}
+
+#search-bar {
+  display: flex;
 }
 
 form {

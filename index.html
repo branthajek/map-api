@@ -15,22 +15,47 @@
   </head>
   <body>
     <header>
-      <h1>Elevation Map</h1>
+      <h1>Map API Tool</h1>
     </header>
-    <div id="map">
-      <p>Please enter an address!</p>
-    </div>
-    <div class="d-none" id="location-info">
-      <h2>Location Information</h2>
-      <ul>
-        <li id="elevation"></li>
-        <li id="weather-description"></li>
-        <li id="temperature"></li>
-      </ul>
-    </div>
-    <form>
-      <input type="text" id="address">
-      <button id="search-button" class="btn btn-primary" type="submit">SEARCH ADDRESS</button>
-    </form>
+    <section id="input-section">
+      <div id="map">
+        <p>Please enter an address!</p>
+      </div>
+      <div class="d-none" id="location-info">
+        <h2>Location Information</h2>
+        <ul>
+          <li id="elevation"></li>
+          <li id="weather-description"></li>
+          <li id="temperature"></li>
+        </ul>
+      </div>
+      <form id="search-bar">
+        <input type="text" id="address">
+        <button id="search-button" class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </section>
+    <section id="select-section">
+      <h2>Find a Trailhead</h2>
+      <label for="pet-select">Choose a State:</label>
+      <select name="states" id="state-select">
+          <option value="">--Please choose an option--</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="hamster">Hamster</option>
+          <option value="parrot">Parrot</option>
+          <option value="spider">Spider</option>
+          <option value="goldfish">Goldfish</option>
+      </select>
+      <label for="pet-select">Choose a County:</label>
+      <select name="counties" id="county-select">
+          <option value="">--Please choose an option--</option>
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="hamster">Hamster</option>
+          <option value="parrot">Parrot</option>
+          <option value="spider">Spider</option>
+          <option value="goldfish">Goldfish</option>
+      </select>
+    </section>
   </body>
 </html>
