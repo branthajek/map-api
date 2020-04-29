@@ -2,15 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Understanding TypeScript</title>
     <!-- this script links the map widget to you api call. You need to add your unique API key at the end of this URL -->
     <script src="https://maps.googleapis.com/maps/api/js?key="
     async defer></script>
     <script src="dist/bundle.js" defer></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="app.css">
   </head>
   <body>
@@ -19,10 +19,9 @@
     </header>
     <section id="input-section">
       <div id="map">
-        <p>Please enter an address!</p>
+        <p>Please enter a location!</p>
       </div>
       <div class="d-none" id="location-info">
-        <h2>Location Information</h2>
         <ul>
           <li id="elevation"></li>
           <li id="weather-description"></li>
@@ -30,32 +29,41 @@
         </ul>
       </div>
       <form id="search-bar">
-        <input type="text" id="address">
-        <button id="search-button" class="btn btn-primary" type="submit">Search</button>
+        <div class="input-group mb-3">
+          <input id="location" type="text" class="form-control" placeholder="Enter Location" aria-label="Enter Location" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button id="search-button" class="btn btn-outline-primary" type="Submit">Search</button>
+          </div>
+        </div>
       </form>
     </section>
     <section id="select-section">
       <h2>Find a Trailhead</h2>
-      <label for="pet-select">Choose a State:</label>
-      <select name="states" id="state-select">
-          <option value="">--Please choose an option--</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="hamster">Hamster</option>
-          <option value="parrot">Parrot</option>
-          <option value="spider">Spider</option>
-          <option value="goldfish">Goldfish</option>
-      </select>
-      <label for="pet-select">Choose a County:</label>
-      <select name="counties" id="county-select">
-          <option value="">--Please choose an option--</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="hamster">Hamster</option>
-          <option value="parrot">Parrot</option>
-          <option value="spider">Spider</option>
-          <option value="goldfish">Goldfish</option>
-      </select>
+      <form id="drop-downs">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="state-select">State</label>
+          </div>
+          <select class="custom-select" name="states" id="state-select">
+            <option selected></option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="county-select">County</label>
+          </div>
+          <select class="custom-select" name="counties" id="county-select">
+            <option selected></option>
+          </select>
+        </div>
+      </form>
     </section>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

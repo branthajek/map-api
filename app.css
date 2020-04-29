@@ -1,17 +1,22 @@
 html {
   font-family: sans-serif;
 }
-
 body{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin: 2rem;
 }
-
 h1, h2 {
   text-align: center;
 }
+input {
+  height: calc(1.5em + .75rem + 2px);
+  width: 260px;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
 
 #map {
   height: 20rem;
@@ -26,25 +31,36 @@ h1, h2 {
   flex-direction: column;
   padding-top: 1rem;
   border: 1px #ccc solid;
+  border-top: none;
 }
 
 #search-bar {
-  display: flex;
-}
-
-form {
   text-align: center;
   margin: 2rem auto;
   padding: .2rem 0;
 }
-#address {
-  height: calc(1.5em + .75rem + 2px);
-  width: 260px;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-}
+
 #search-button {
   margin-bottom: .2rem;
 }
 
+#select-section {
+  display: flex;
+  flex-direction: column;
+}
 
+/* large screens */
+@media (min-width: 992px) {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #map, 
+  #location-info, 
+  #search-bar, 
+  #drop-downs {
+    width: 70%;
+  }
+}

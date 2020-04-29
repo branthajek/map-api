@@ -4,16 +4,16 @@ import { GOOGLE_API_KEY, WEATHER_API_KEY } from './api-keys';
 import { GoogleGeocodingResponse, OpenWeatherResponse } from './types';
 import * as Constants from './constants';
 
-let enteredAddress: string;
+let enteredLocation: string;
 let coordinates: { lat: number; lng: number; };
 
-export class SearchAddress {
+export class SearchLocation {
     constructor() {}
-    searchAddressHandler(event: Event) {
-        enteredAddress = Constants.addressInput.value;
+    searchLocationHandler(event: Event) {
+        enteredLocation = Constants.locationInput.value;
         event.preventDefault();
 
-        axios.get<GoogleGeocodingResponse>(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(enteredAddress)}&key=${GOOGLE_API_KEY}`).then(response => {
+        axios.get<GoogleGeocodingResponse>(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(enteredLocation)}&key=${GOOGLE_API_KEY}`).then(response => {
             if (response.data.status != 'OK') {
                 throw new Error('Could not fetch location');
             }
@@ -37,13 +37,13 @@ export class SearchAddress {
                     console.log(results);
                     let elevationMeters = results[0].elevation;
                     let elevationFeet = (elevationMeters * 3.281).toFixed(2);
-                    Constants.elevation.textContent = `The elevation at this point is ${elevationFeet} feet.`;
+                    Constants.elevation.textContent = `Elevation at this point is ${elevationFeet} feet.`;
                 });
             }
             axios.get<OpenWeatherResponse>(`http://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lng}&units=imperial&appid=${WEATHER_API_KEY}`).then(response => {
                 console.log(response)
-                Constants.weatherDescription.textContent = response.data.weather[0].description;
-                Constants.temperature.textContent = response.data.main.temp.toString() + ' F.';
+                Constants.weatherDescription.textContent = `Current weather condition: ${response.data.weather[0].description}.`;
+                Constants.temperature.textContent = `Current temperature: ${response.data.main.temp.toString()} F.`;
             }).catch(error => {
                 alert(error.message);
                 console.log(error);

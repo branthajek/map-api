@@ -1,7 +1,7 @@
-import { SearchAddress } from './search-address';
+import { SearchLocation } from './search-location';
 import * as Constants from './constants';
 
-let searchAddress = new SearchAddress();
+let searchLocation = new SearchLocation();
 
-Constants.form.addEventListener('submit', searchAddress.searchAddressHandler);
+Constants.form.addEventListener('submit', searchLocation.searchLocationHandler);
 
