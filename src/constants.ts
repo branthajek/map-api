@@ -1,5 +1,6 @@
 export const mapElement = document.getElementById('map')! as HTMLDivElement;
-export const form = document.querySelector('form')!;
+export const form = document.querySelector('#search-bar')!;
+export const selectForm = document.querySelector('#drop-downs')!;
 export const locationInput = document.getElementById('location')! as HTMLInputElement;
 export const elevation = document.getElementById('elevation')! as HTMLLIElement;
 export const weatherDescription = document.getElementById('weather-description')! as HTMLLIElement;
