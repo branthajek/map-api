@@ -1,20 +1,19 @@
 
 import axios from 'axios';
 import * as Constants from './constants';
-import { States } from './us-states-list';
-import { GoogleGeocodingResponse } from './types';
+import { States, OregonCounties, WashingtonCounties } from './datasets';
+import { PlacesResponse } from './types';
 import { GOOGLE_API_KEY } from './api-keys';
 
 const defaultStateOption = document.createElement('option');
 const defaultCountyOption = document.createElement('option');
-defaultStateOption.text = '';
-Constants.stateDropdown.length = 0;
-Constants.stateDropdown.add(defaultStateOption);
-defaultCountyOption.text = '';
-Constants.countyDropdown.length = 0;
-Constants.countyDropdown.add(defaultCountyOption);
+let selectedState: string;
+let enteredLocation: string;
 
 function populateStates() {
+    defaultStateOption.text = '';
+    Constants.stateDropdown.length = 0;
+    Constants.stateDropdown.add(defaultStateOption);
     for (let state of States) {
         let el = document.createElement("option");
         el.textContent = state;
@@ -24,11 +23,43 @@ function populateStates() {
 };
 populateStates();
 
+function refreshCounties() {
+    defaultCountyOption.text = '';
+    Constants.countyDropdown.length = 0;
+    Constants.countyDropdown.add(defaultCountyOption);
+}
+
 function stateSelectHandler() {
     alert('selection changed');
-    let selectedState = Constants.stateDropdown.value;
 
-    axios.get<GoogleGeocodingResponse>(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(selectedState)}&key=${GOOGLE_API_KEY}`).then(response => {
+    selectedState = Constants.stateDropdown.value;
+
+    function populateCounties() {
+        if (selectedState == "Oregon") {
+            refreshCounties();
+            for (let county of OregonCounties) {
+                let el = document.createElement("option");
+                el.textContent = county;
+                el.value = county;
+                Constants.countyDropdown.appendChild(el);
+            }
+        } else if (selectedState == "Washington") {
+            refreshCounties();
+            for (let county of WashingtonCounties) {
+                let el = document.createElement("option");
+                el.textContent = county;
+                el.value = county;
+                Constants.countyDropdown.appendChild(el);
+            }
+        }
+    };
+    populateCounties();
+}
+function countySelectHandler() {
+    alert('selection changed');
+    enteredLocation = `Trailhead ${Constants.countyDropdown.value} county ${Constants.stateDropdown.value} state`;
+
+    axios.get<PlacesResponse>(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURI(enteredLocation)}&fields=formatted_address,geometry,name&key=${GOOGLE_API_KEY}`).then(response => {    
         if (response.data.status != 'OK') {
             throw new Error('Could not fetch location');
         }
@@ -55,8 +86,6 @@ function stateSelectHandler() {
         //         Constants.elevation.textContent = `Elevation at this point is ${elevationFeet} feet.`;
         //     });
         // }
-        
-
     }).catch(error => {
         alert(error.message);
         console.log(error);
@@ -64,12 +93,7 @@ function stateSelectHandler() {
 }
 
 Constants.stateDropdown.addEventListener('change', stateSelectHandler);
-
-// from here I need to get an API for states to fill in the state drop down, or do it manually
-// Then I need to pull in the value of whatever state was selected into a var
-// Then I need to inject that value into the geocoding API and filter the list of counties from the returned JSON
-// Then I need to return any location that is a trailhead
-// Offer optional filtering?
+Constants.countyDropdown.addEventListener('change', countySelectHandler);
 
 // const url = ``;
 
