@@ -8,3 +8,4 @@ export const temperature = document.getElementById('temperature')! as HTMLLIElem
 export const locationInformation = document.getElementById('location-info')! as HTMLDivElement;
 export const stateDropdown = document.getElementById('state-select')! as HTMLSelectElement;
 export const countyDropdown = document.getElementById('county-select')! as HTMLSelectElement;
+export const placesList = document.getElementById('places-list')! as HTMLLIElement;

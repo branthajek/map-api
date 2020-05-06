@@ -1,6 +1,6 @@
 export const States: string[] = [
-    "Oregon",
-    "Washington"
+    "OR",
+    "WA"
 ]
 export const OregonCounties: string[] = [
     "Baker",

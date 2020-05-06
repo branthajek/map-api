@@ -35,7 +35,7 @@ function stateSelectHandler() {
     selectedState = Constants.stateDropdown.value;
 
     function populateCounties() {
-        if (selectedState == "Oregon") {
+        if (selectedState == "OR") {
             refreshCounties();
             for (let county of OregonCounties) {
                 let el = document.createElement("option");
@@ -43,7 +43,7 @@ function stateSelectHandler() {
                 el.value = county;
                 Constants.countyDropdown.appendChild(el);
             }
-        } else if (selectedState == "Washington") {
+        } else if (selectedState == "WA") {
             refreshCounties();
             for (let county of WashingtonCounties) {
                 let el = document.createElement("option");
@@ -57,35 +57,24 @@ function stateSelectHandler() {
 }
 function countySelectHandler() {
     alert('selection changed');
-    enteredLocation = `Trailhead ${Constants.countyDropdown.value} county ${Constants.stateDropdown.value} state`;
-
+    enteredLocation = `${Constants.countyDropdown.value} County, ${Constants.stateDropdown.value} trailheads`;
+    Constants.placesList.innerHTML = "";
     axios.get<PlacesResponse>(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURI(enteredLocation)}&fields=formatted_address,geometry,name&key=${GOOGLE_API_KEY}`).then(response => {    
         if (response.data.status != 'OK') {
             throw new Error('Could not fetch location');
         }
         console.log(response)
-        // coordinates = response.data.results[0].geometry.location;
-        // const map = new google.maps.Map(Constants.mapElement, {
-        //     center: coordinates,
-        //     zoom: 8
-        // });
-        // new google.maps.Marker({position: coordinates, map: map});
-        // console.log(coordinates);
+        let results = response.data.results;
+        let places = results.map(function(result) {
+            return result.name;
+        });
+        console.log(places);
+        for (let name of places) {
+            let el = document.createElement("li");
+            el.textContent = name;
+            Constants.placesList.appendChild(el);
+        }
 
-        // const elevator = new google.maps.ElevationService;
-        // displayLocationElevation(coordinates, elevator);
-
-        // function displayLocationElevation(location: { lat: number; lng: number; }, elevator: any) {
-        //     // Initiate the location request
-        //     elevator.getElevationForLocations({
-        //     'locations': [location]
-        //     }, function(results: {elevation: number}[], _: any) {
-        //         console.log(results);
-        //         let elevationMeters = results[0].elevation;
-        //         let elevationFeet = (elevationMeters * 3.281).toFixed(2);
-        //         Constants.elevation.textContent = `Elevation at this point is ${elevationFeet} feet.`;
-        //     });
-        // }
     }).catch(error => {
         alert(error.message);
         console.log(error);
@@ -94,29 +83,3 @@ function countySelectHandler() {
 
 Constants.stateDropdown.addEventListener('change', stateSelectHandler);
 Constants.countyDropdown.addEventListener('change', countySelectHandler);
-
-// const url = ``;
-
-// const request = new XMLHttpRequest();
-// request.open('GET', url, true);
-
-// request.onload = function() {
-//   if (request.status === 200) {
-//     const data = JSON.parse(request.responseText);
-//     let option;
-//     for (let i = 0; i < data.length; i++) {
-//       option = document.createElement('option');
-//       option.text = data[i].name;
-//       option.value = data[i].abbreviation;
-//       Constants.stateDropdown.add(option);
-//     }
-//    } else {
-//     // Reached the server, but it returned an error
-//   }   
-// }
-
-// request.onerror = function() {
-//   console.error('An error occurred fetching the JSON from ' + url);
-// };
-
-// request.send();
