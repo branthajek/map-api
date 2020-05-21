@@ -55,8 +55,9 @@ function stateSelectHandler() {
     };
     populateCounties();
 }
-function countySelectHandler() {
+function countySelectHandler(event: Event) {
     alert('selection changed');
+    event.preventDefault();
     enteredLocation = `${Constants.countyDropdown.value} County, ${Constants.stateDropdown.value} trailheads`;
     Constants.placesList.innerHTML = "";
     axios.get<PlacesResponse>(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURI(enteredLocation)}&fields=formatted_address,geometry,name&key=${GOOGLE_API_KEY}`).then(response => {    
