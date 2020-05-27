@@ -30,7 +30,6 @@ function refreshCounties() {
 }
 
 function stateSelectHandler() {
-    alert('selection changed');
 
     selectedState = Constants.stateDropdown.value;
 
@@ -56,7 +55,6 @@ function stateSelectHandler() {
     populateCounties();
 }
 function countySelectHandler(event: Event) {
-    alert('selection changed');
     event.preventDefault();
     enteredLocation = `${Constants.countyDropdown.value} County, ${Constants.stateDropdown.value} trailheads`;
     Constants.placesList.innerHTML = "";
