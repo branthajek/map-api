@@ -38,7 +38,7 @@ export function searchLocationHandler(event: Event) {
                 Constants.elevation.textContent = `Elevation at this point is ${elevationFeet} feet.`;
             });
         }
-        axios.get<OpenWeatherResponse>(`http://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lng}&units=imperial&appid=${WEATHER_API_KEY}`).then(response => {
+        axios.get<OpenWeatherResponse>(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lng}&units=imperial&appid=${WEATHER_API_KEY}`).then(response => {
             console.log(response)
             Constants.weatherDescription.textContent = `Current weather condition: ${response.data.weather[0].description}.`;
             Constants.temperature.textContent = `Current temperature: ${response.data.main.temp.toString()} F.`;
